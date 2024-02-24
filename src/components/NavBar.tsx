@@ -289,7 +289,7 @@ export function NavBar2(): JSX.Element {
 									<div>
 										<img
 											className="h-8 w-auto"
-											src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+											src="assets/images/logo-tailwind.png"
 											alt="Your Company"
 										/>
 									</div>

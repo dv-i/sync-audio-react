@@ -10,13 +10,19 @@ export default function Example(): JSX.Element {
 						<div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
 							<div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
 								<div className="absolute inset-0">
-									<video
+									{/* <video
 										className="h-full w-full object-cover"
 										src={"assets/videos/intro_video.mp4"}
 										loop
 										autoPlay
 										muted
 										controls={false}
+									/> */}
+									<img
+										className="h-full w-full object-cover"
+										src={
+											"https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+										}
 									/>
 									<div className="absolute inset-0 bg-indigo-700 mix-blend-multiply" />
 								</div>

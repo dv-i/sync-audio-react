@@ -97,7 +97,7 @@ export default function Example(): JSX.Element {
 					<div className="space-y-8">
 						<img
 							className="h-7"
-							src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+							src="assets/images/logo-tailwind.png"
 							alt="Company name"
 						/>
 						<p className="text-sm leading-6 text-gray-300">

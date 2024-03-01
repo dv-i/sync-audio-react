@@ -10,6 +10,7 @@ import Submissions from "./pages/Submissions";
 import Footer from "./components/Footer";
 import ComingSoon from "./pages/ComingSoon";
 import FAQ from "./pages/FAQ";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App(): JSX.Element {
 	return (
@@ -20,6 +21,7 @@ function App(): JSX.Element {
 					<Route path="/" index element={<Home />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/faq" element={<FAQ />} />
+					<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 
 					<Route path="/music" element={<ComingSoon />} />
 					<Route path="/playlists" element={<ComingSoon />} />

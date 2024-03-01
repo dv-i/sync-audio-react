@@ -222,7 +222,7 @@ export function NavBar2(): JSX.Element {
 						<span className="sr-only">Your Company</span>
 						<NavLink to={"/"}>
 							<img
-								className="h-8 w-auto sm:h-10"
+								className="h-6 w-auto sm:h-6"
 								src="assets/images/logo-tailwind.png"
 								alt=""
 							/>
@@ -288,7 +288,7 @@ export function NavBar2(): JSX.Element {
 								<div className="flex items-center justify-between">
 									<div>
 										<img
-											className="h-8 w-auto"
+											className="h-6 w-auto"
 											src="assets/images/logo-tailwind.png"
 											alt="Your Company"
 										/>

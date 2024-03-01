@@ -7,15 +7,9 @@ const navigation = {
 	],
 	support: [
 		{ name: "Pricing", href: "#" },
-		{ name: "FAQ", href: "#" },
+		{ name: "FAQ", href: "/faq" },
 	],
-	company: [
-		{ name: "About", href: "#" },
-		// { name: "Blog", href: "#" },
-		// { name: "Jobs", href: "#" },
-		// { name: "Press", href: "#" },
-		// { name: "Partners", href: "#" },
-	],
+	company: [{ name: "About", href: "/about" }],
 	legal: [
 		{ name: "Copyright", href: "#" },
 		{ name: "Privacy", href: "#" },

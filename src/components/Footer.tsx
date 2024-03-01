@@ -1,4 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
+
+import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
+
 const navigation = {
 	music: [
 		{ name: "Songs", href: "#" },
@@ -11,7 +16,6 @@ const navigation = {
 	],
 	company: [{ name: "About", href: "/about" }],
 	legal: [
-		{ name: "Copyright", href: "#" },
 		{ name: "Privacy", href: "#" },
 		{ name: "Purchase", href: "#" },
 	],
@@ -81,120 +85,206 @@ const navigation = {
 };
 
 export default function Example(): JSX.Element {
+	const [open, setOpen] = useState(false);
 	return (
-		<footer className="bg-gray-900" aria-labelledby="footer-heading">
-			<h2 id="footer-heading" className="sr-only">
-				Footer
-			</h2>
-			<div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
-				<div className="xl:grid xl:grid-cols-3 xl:gap-8">
-					<div className="space-y-8">
-						<img
-							className="h-7"
-							src="assets/images/logo-tailwind.png"
-							alt="Company name"
-						/>
-						<p className="text-sm leading-6 text-gray-300">
-							Making the world a better place one music note at a
-							time.
-						</p>
-						<div className="flex space-x-6">
-							{navigation.social.map((item) => (
-								<a
-									key={item.name}
-									href={item.href}
-									className="text-gray-500 hover:text-gray-400"
+		<>
+			{/* Copyright Modal */}
+			<Transition.Root show={open} as={Fragment}>
+				<Dialog as="div" className="relative z-10" onClose={setOpen}>
+					<Transition.Child
+						as={Fragment}
+						enter="ease-out duration-300"
+						enterFrom="opacity-0"
+						enterTo="opacity-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100"
+						leaveTo="opacity-0"
+					>
+						<div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+					</Transition.Child>
+
+					<div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+						<div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+							<Transition.Child
+								as={Fragment}
+								enter="ease-out duration-300"
+								enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+								enterTo="opacity-100 translate-y-0 sm:scale-100"
+								leave="ease-in duration-200"
+								leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+								leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+							>
+								<Dialog.Panel
+									style={{ minWidth: 600 }}
+									className="w-300 relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
 								>
-									<span className="sr-only">{item.name}</span>
-									<item.icon
-										className="h-6 w-6"
-										aria-hidden="true"
-									/>
-								</a>
-							))}
+									<div>
+										<div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
+											<InformationCircleIcon
+												className="h-6 w-6 text-indigo-600"
+												aria-hidden="true"
+											/>
+										</div>
+										<div className="mt-3 text-center sm:mt-5">
+											<Dialog.Title
+												as="h3"
+												className="text-base font-semibold leading-6 text-gray-900"
+											>
+												Site Copyright Notice
+											</Dialog.Title>
+											<div className="mt-2">
+												<p className="text-sm text-left text-gray-500">
+													© 2024 Sync-Audio
+												</p>
+												<p className="text-sm mt-2 text-left text-gray-500">
+													All rights to the contents
+													of this website are the
+													property of the owner. All
+													unauthorised copying and
+													transmission and
+													reproduction in any form or
+													format are prohibited. Use
+													of the services provided by
+													the website is by permission
+													only in accordance to terms
+													and conditions of using the
+													site.
+												</p>
+											</div>
+										</div>
+									</div>
+								</Dialog.Panel>
+							</Transition.Child>
 						</div>
 					</div>
-					<div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-						<div className="md:grid md:grid-cols-2 md:gap-8">
-							<div>
-								<h3 className="text-sm font-semibold leading-6 text-white">
-									Music
-								</h3>
-								<ul role="list" className="mt-6 space-y-4">
-									{navigation.music.map((item) => (
-										<li key={item.name}>
-											<a
-												href={item.href}
-												className="text-sm leading-6 text-gray-300 hover:text-white"
-											>
-												{item.name}
-											</a>
-										</li>
-									))}
-								</ul>
-							</div>
-							<div className="mt-10 md:mt-0">
-								<h3 className="text-sm font-semibold leading-6 text-white">
-									Support
-								</h3>
-								<ul role="list" className="mt-6 space-y-4">
-									{navigation.support.map((item) => (
-										<li key={item.name}>
-											<a
-												href={item.href}
-												className="text-sm leading-6 text-gray-300 hover:text-white"
-											>
-												{item.name}
-											</a>
-										</li>
-									))}
-								</ul>
+				</Dialog>
+			</Transition.Root>
+			<footer className="bg-gray-900" aria-labelledby="footer-heading">
+				<h2 id="footer-heading" className="sr-only">
+					Footer
+				</h2>
+				<div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
+					<div className="xl:grid xl:grid-cols-3 xl:gap-8">
+						<div className="space-y-8">
+							<img
+								className="h-7"
+								src="assets/images/logo-tailwind.png"
+								alt="Company name"
+							/>
+							<p className="text-sm leading-6 text-gray-300">
+								Making the world a better place one music note
+								at a time.
+							</p>
+							<div className="flex space-x-6">
+								{navigation.social.map((item) => (
+									<a
+										key={item.name}
+										href={item.href}
+										className="text-gray-500 hover:text-gray-400"
+									>
+										<span className="sr-only">
+											{item.name}
+										</span>
+										<item.icon
+											className="h-6 w-6"
+											aria-hidden="true"
+										/>
+									</a>
+								))}
 							</div>
 						</div>
-						<div className="md:grid md:grid-cols-2 md:gap-8">
-							<div>
-								<h3 className="text-sm font-semibold leading-6 text-white">
-									Company
-								</h3>
-								<ul role="list" className="mt-6 space-y-4">
-									{navigation.company.map((item) => (
-										<li key={item.name}>
-											<a
-												href={item.href}
-												className="text-sm leading-6 text-gray-300 hover:text-white"
-											>
-												{item.name}
-											</a>
-										</li>
-									))}
-								</ul>
+						<div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+							<div className="md:grid md:grid-cols-2 md:gap-8">
+								<div>
+									<h3 className="text-sm font-semibold leading-6 text-white">
+										Music
+									</h3>
+									<ul role="list" className="mt-6 space-y-4">
+										{navigation.music.map((item) => (
+											<li key={item.name}>
+												<a
+													href={item.href}
+													className="text-sm leading-6 text-gray-300 hover:text-white"
+												>
+													{item.name}
+												</a>
+											</li>
+										))}
+									</ul>
+								</div>
+								<div className="mt-10 md:mt-0">
+									<h3 className="text-sm font-semibold leading-6 text-white">
+										Support
+									</h3>
+									<ul role="list" className="mt-6 space-y-4">
+										{navigation.support.map((item) => (
+											<li key={item.name}>
+												<a
+													href={item.href}
+													className="text-sm leading-6 text-gray-300 hover:text-white"
+												>
+													{item.name}
+												</a>
+											</li>
+										))}
+									</ul>
+								</div>
 							</div>
-							<div className="mt-10 md:mt-0">
-								<h3 className="text-sm font-semibold leading-6 text-white">
-									Legal
-								</h3>
-								<ul role="list" className="mt-6 space-y-4">
-									{navigation.legal.map((item) => (
-										<li key={item.name}>
+							<div className="md:grid md:grid-cols-2 md:gap-8">
+								<div>
+									<h3 className="text-sm font-semibold leading-6 text-white">
+										Company
+									</h3>
+									<ul role="list" className="mt-6 space-y-4">
+										{navigation.company.map((item) => (
+											<li key={item.name}>
+												<a
+													href={item.href}
+													className="text-sm leading-6 text-gray-300 hover:text-white"
+												>
+													{item.name}
+												</a>
+											</li>
+										))}
+									</ul>
+								</div>
+								<div className="mt-10 md:mt-0">
+									<h3 className="text-sm font-semibold leading-6 text-white">
+										Legal
+									</h3>
+									<ul role="list" className="mt-6 space-y-4">
+										<li key="Copyright">
 											<a
-												href={item.href}
-												className="text-sm leading-6 text-gray-300 hover:text-white"
+												onClick={() => {
+													setOpen(true);
+												}}
+												className="cursor-pointer text-sm leading-6 text-gray-300 hover:text-white"
 											>
-												{item.name}
+												Copyright
 											</a>
 										</li>
-									))}
-								</ul>
+										{navigation.legal.map((item) => (
+											<li key={item.name}>
+												<a
+													href={item.href}
+													className="text-sm leading-6 text-gray-300 hover:text-white"
+												>
+													{item.name}
+												</a>
+											</li>
+										))}
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
+					<div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
+						<p className="text-xs leading-5 text-gray-400">
+							&copy; 2024 Sync-Audio. All rights reserved.
+						</p>
+					</div>
 				</div>
-				<div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
-					<p className="text-xs leading-5 text-gray-400">
-						&copy; 2024 Sync-Audio. All rights reserved.
-					</p>
-				</div>
-			</div>
-		</footer>
+			</footer>
+		</>
 	);
 }

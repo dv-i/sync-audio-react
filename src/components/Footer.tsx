@@ -14,10 +14,14 @@ const navigation = {
 		{ name: "Pricing", href: "#" },
 		{ name: "FAQ", href: "/faq" },
 	],
-	company: [{ name: "About", href: "/about" }],
+	company: [
+		{ name: "About", href: "/about" },
+		{ name: "Contact", href: "/contact" },
+	],
 	legal: [
-		{ name: "Privacy Policy", href: "/privacypolicy" },
-		{ name: "Purchase Policy", href: "/purchasepolicy" },
+		{ name: "Privacy", href: "/privacypolicy" },
+		{ name: "Purchase", href: "/purchasepolicy" },
+		{ name: "Site Use", href: "/disclaimer" },
 	],
 	social: [
 		{

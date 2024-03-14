@@ -11,7 +11,7 @@ const navigation = {
 		{ name: "Artists", href: "#" },
 	],
 	support: [
-		{ name: "Pricing", href: "#" },
+		{ name: "Pricing", href: "/pricing" },
 		{ name: "FAQ", href: "/faq" },
 	],
 	company: [

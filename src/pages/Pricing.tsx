@@ -298,19 +298,13 @@ function CommercialPricing(): JSX.Element {
 					<div
 						key={tier.id}
 						className={classNames(
-							tier.mostPopular
-								? "ring-2 ring-indigo-600 bg-white shadow-2xl"
-								: "ring-2 ring-gray-200 bg-white/60",
-							"rounded-3xl p-8"
+							"ring-2 ring-gray-200 bg-white/60 rounded-3xl p-8"
 						)}
 					>
 						<h3
 							id={tier.id}
 							className={classNames(
-								tier.mostPopular
-									? "text-indigo-600"
-									: "text-gray-900",
-								"text-lg font-semibold leading-8"
+									"text-gray-900 text-lg font-semibold leading-8"
 							)}
 						>
 							{tier.name}

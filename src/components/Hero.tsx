@@ -24,18 +24,18 @@ export default function Example(): JSX.Element {
 											"https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 										}
 									/>
-									<div className="absolute inset-0 bg-indigo-700 mix-blend-multiply" />
+									<div className="absolute inset-0 bg-blue-700 mix-blend-multiply" />
 								</div>
 								<div className="relative px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
 									<h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
 										<span className="block text-white">
 											Music Licensing for
 										</span>
-										<span className="block text-indigo-200">
+										<span className="block text-blue-200">
 											New Media, Video And Film
 										</span>
 									</h1>
-									<p className="mx-auto mt-6 max-w-lg text-center text-xl text-indigo-200 sm:max-w-3xl">
+									<p className="mx-auto mt-6 max-w-lg text-center text-xl text-blue-200 sm:max-w-3xl">
 										Representing real unsigned independent
 										artists, musicians, composers, poets and
 										bands
@@ -44,13 +44,13 @@ export default function Example(): JSX.Element {
 										<div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
 											<a
 												href="#"
-												className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8"
+												className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-blue-700 shadow-sm hover:bg-blue-50 sm:px-8"
 											>
 												Get started
 											</a>
 											<a
 												href="#"
-												className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
+												className="flex items-center justify-center rounded-md border border-transparent bg-blue-500 bg-opacity-60 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
 											>
 												Live demo
 											</a>

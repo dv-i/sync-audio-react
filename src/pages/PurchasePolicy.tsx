@@ -66,7 +66,7 @@ function PurchasePolicy(): JSX.Element {
 						services to the following email address:&nbsp;
 						<a
 							href="mailto:info@sync-audio.com"
-							className="text-indigo-600"
+							className="text-blue-600"
 						>
 							info@sync-audio.com
 						</a>

@@ -354,7 +354,7 @@ function CategoryFilter(): JSX.Element {
 																			defaultChecked={
 																				option.checked
 																			}
-																			className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+																			className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
 																		/>
 																		<label
 																			htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -512,7 +512,7 @@ function CategoryFilter(): JSX.Element {
 																		defaultChecked={
 																			option.checked
 																		}
-																		className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+																		className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
 																	/>
 																	<label
 																		htmlFor={`filter-${section.id}-${optionIdx}`}

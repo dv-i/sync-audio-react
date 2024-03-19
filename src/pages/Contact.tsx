@@ -35,7 +35,7 @@ export default function Example(): JSX.Element {
 										<dt className="sr-only">Email</dt>
 										<dd>
 											<a
-												className="font-semibold text-indigo-600"
+												className="font-semibold text-blue-600"
 												href="mailto:info@example.com"
 											>
 												info@sync-audio.com
@@ -59,7 +59,7 @@ export default function Example(): JSX.Element {
 										<dt className="sr-only">Email</dt>
 										<dd>
 											<a
-												className="font-semibold text-indigo-600"
+												className="font-semibold text-blue-600"
 												href="mailto:press@sync-audio.com"
 											>
 												press@sync-audio.com

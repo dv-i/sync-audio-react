@@ -123,9 +123,9 @@ export default function Example(): JSX.Element {
 									className="w-300 relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
 								>
 									<div>
-										<div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
+										<div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
 											<InformationCircleIcon
-												className="h-6 w-6 text-indigo-600"
+												className="h-6 w-6 text-blue-600"
 												aria-hidden="true"
 											/>
 										</div>

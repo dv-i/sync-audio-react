@@ -33,7 +33,7 @@ export default function Example(): JSX.Element {
 				/>
 			</div>
 			<div className="mx-auto max-w-2xl text-center lg:max-w-4xl">
-				<h2 className="text-base font-semibold leading-7 text-indigo-600">
+				<h2 className="text-base font-semibold leading-7 text-blue-600">
 					Pricing
 				</h2>
 				<p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
@@ -49,7 +49,7 @@ export default function Example(): JSX.Element {
 				<RadioGroup
 					value={pricingType}
 					onChange={setPricingType}
-					className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-indigo-500"
+					className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-blue-500"
 				>
 					<RadioGroup.Label className="sr-only">
 						Payment Pricing Type
@@ -61,7 +61,7 @@ export default function Example(): JSX.Element {
 							className={({ checked }) =>
 								classNames(
 									checked
-										? "bg-indigo-600 text-white"
+										? "bg-blue-600 text-white"
 										: "text-gray-500",
 									"cursor-pointer rounded-full px-2.5 py-1"
 								)
@@ -134,7 +134,7 @@ function PersonalPricing(): JSX.Element {
 				>
 					<h3
 						id={tier.id}
-						className="text-base font-semibold leading-7 text-indigo-600"
+						className="text-base font-semibold leading-7 text-blue-600"
 					>
 						{tier.name}
 					</h3>
@@ -169,7 +169,7 @@ function PersonalPricing(): JSX.Element {
 						{tier.info.map((feature) => (
 							<li key={feature} className="flex gap-x-3">
 								<InformationCircleIcon
-									className="h-6 w-5 flex-none text-indigo-600"
+									className="h-6 w-5 flex-none text-blue-600"
 									aria-hidden="true"
 								/>
 								{feature}
@@ -304,7 +304,7 @@ function CommercialPricing(): JSX.Element {
 						<h3
 							id={tier.id}
 							className={classNames(
-									"text-gray-900 text-lg font-semibold leading-8"
+								"text-gray-900 text-lg font-semibold leading-8"
 							)}
 						>
 							{tier.name}
@@ -347,7 +347,7 @@ function CommercialPricing(): JSX.Element {
 											type="button"
 											className={`relative inline-flex items-center rounded-l-md px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
 												companySize === "1-50"
-													? "text-white bg-indigo-500 "
+													? "text-white bg-blue-500 "
 													: "bg-white text-gray-900"
 											}`}
 											onClick={() => {
@@ -360,7 +360,7 @@ function CommercialPricing(): JSX.Element {
 											type="button"
 											className={`relative inline-flex items-center px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
 												companySize === "51-250"
-													? "text-white bg-indigo-500 "
+													? "text-white bg-blue-500 "
 													: "bg-white text-gray-900"
 											}`}
 											onClick={() => {
@@ -373,7 +373,7 @@ function CommercialPricing(): JSX.Element {
 											type="button"
 											className={`relative inline-flex items-center rounded-r-md px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
 												companySize === "250+"
-													? "text-white bg-indigo-500 "
+													? "text-white bg-blue-500 "
 													: "bg-white text-gray-900"
 											}`}
 											onClick={() => {
@@ -395,7 +395,7 @@ function CommercialPricing(): JSX.Element {
 											type="button"
 											className={`relative inline-flex items-center rounded-l-md px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
 												indieType === "Film"
-													? "text-white bg-indigo-500 "
+													? "text-white bg-blue-500 "
 													: "bg-white text-gray-900"
 											}`}
 											onClick={() => {
@@ -409,7 +409,7 @@ function CommercialPricing(): JSX.Element {
 											type="button"
 											className={`relative inline-flex items-center rounded-r-md px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
 												indieType === "Trailer"
-													? "text-white bg-indigo-500 "
+													? "text-white bg-blue-500 "
 													: "bg-white text-gray-900"
 											}`}
 											onClick={() => {
@@ -452,7 +452,7 @@ function CommercialPricing(): JSX.Element {
 							{tier.info.map((feature) => (
 								<li key={feature} className="flex gap-x-3">
 									<InformationCircleIcon
-										className="h-6 w-5 flex-none text-indigo-600"
+										className="h-6 w-5 flex-none text-blue-600"
 										aria-hidden="true"
 									/>
 									{feature}

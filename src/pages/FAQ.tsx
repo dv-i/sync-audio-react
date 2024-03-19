@@ -44,7 +44,7 @@ export default function Example(): JSX.Element {
 							to our{" "}
 							<a
 								href="mailto:info@sync-audio.com"
-								className="font-semibold text-indigo-600 hover:text-indigo-500"
+								className="font-semibold text-blue-600 hover:text-blue-500"
 							>
 								customer support
 							</a>{" "}

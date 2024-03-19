@@ -229,7 +229,7 @@ export function NavBar2(): JSX.Element {
 						</NavLink>
 					</div>
 					<div className="-my-2 -mr-2 md:hidden">
-						<Popover.Button className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+						<Popover.Button className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
 							<span className="absolute -inset-0.5" />
 							<span className="sr-only">Open menu</span>
 							<Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -262,7 +262,7 @@ export function NavBar2(): JSX.Element {
 						</a>
 						<a
 							href="#"
-							className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+							className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
 						>
 							Sign up
 						</a>
@@ -294,7 +294,7 @@ export function NavBar2(): JSX.Element {
 										/>
 									</div>
 									<div className="-mr-2">
-										<Popover.Button className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+										<Popover.Button className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
 											<span className="absolute -inset-0.5" />
 											<span className="sr-only">
 												Close menu
@@ -316,7 +316,7 @@ export function NavBar2(): JSX.Element {
 											className={({ isActive }) =>
 												`text-base font-medium text-gray-900 hover:text-gray-700 ${
 													isActive
-														? "text-indigo-600"
+														? "text-blue-600"
 														: ""
 												}`
 											}
@@ -328,7 +328,7 @@ export function NavBar2(): JSX.Element {
 								<div className="mt-6">
 									<a
 										href="#"
-										className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+										className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
 									>
 										Sign up
 									</a>

@@ -8,7 +8,8 @@ const navigation = {
 	music: [
 		{ name: "Songs", href: "#" },
 		{ name: "Playlists", href: "#" },
-		{ name: "Artists", href: "#" },
+		{ name: "Submission", href: "/submissions" },
+		{ name: "Bundle Use", href: "/bundleuse" },
 	],
 	support: [
 		{ name: "Pricing", href: "/pricing" },

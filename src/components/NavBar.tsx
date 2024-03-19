@@ -8,7 +8,6 @@ const navigation = [
 	{ name: "Music", route: "/music", current: false },
 	{ name: "About", route: "/about", current: false },
 	{ name: "Playlists", route: "/playlists", current: false },
-	{ name: "Submissions", route: "/submissions", current: false },
 ];
 
 function classNames(...classes: string[]): string {
@@ -215,11 +214,11 @@ export default function Example(): JSX.Element {
 
 export function NavBar2(): JSX.Element {
 	return (
-		<header>
+		<header className="fixed top-0 left-0 w-full overflow-hidden z-10">
 			<Popover className="relative bg-white">
-				<div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:justify-start md:space-x-10 lg:px-8">
-					<div className="flex justify-start lg:w-0 lg:flex-1">
-						<span className="sr-only">Your Company</span>
+				<div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:justify-start md:space-x-10 lg:px-8">
+					<div className="flex  justify-start overflow-auto">
+						<span className="sr-only">Sync Audio</span>
 						<NavLink to={"/"}>
 							<img
 								className="h-6 w-auto sm:h-6"

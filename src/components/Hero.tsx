@@ -1,4 +1,5 @@
 import React from "react";
+import FeatruredArtists from "./FeatruredArtists";
 export default function Example(): JSX.Element {
 	return (
 		<div className="bg-white">
@@ -21,7 +22,7 @@ export default function Example(): JSX.Element {
 									<img
 										className="h-full w-full object-cover"
 										src={
-											"https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+											"https://plus.unsplash.com/premium_photo-1661720477446-429093480ad7?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 										}
 									/>
 									<div className="absolute inset-0 bg-blue-700 mix-blend-multiply" />
@@ -61,51 +62,8 @@ export default function Example(): JSX.Element {
 						</div>
 					</div>
 
-					{/* Logo cloud */}
-					<div className="bg-gray-100">
-						<div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-							<p className="text-center text-base font-semibold text-gray-500">
-								Trusted by several companies using our music
-							</p>
-							<div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
-								<div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-									<img
-										className="h-12"
-										src="assets/images/bbc-logo.png"
-										alt="Tuple"
-									/>
-								</div>
-								<div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-									<img
-										className="h-12"
-										src="assets/images/apple-logo.png"
-										alt="Mirage"
-									/>
-								</div>
-								<div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-									<img
-										className="h-12"
-										src="assets/images/mobo-logo.png"
-										alt="StaticKit"
-									/>
-								</div>
-								<div className="col-span-1 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1">
-									<img
-										className="h-12"
-										src="assets/images/mtv-logo.png"
-										alt="Transistor"
-									/>
-								</div>
-								<div className="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
-									<img
-										className="h-12"
-										src="assets/images/cancer-gray-logo.png"
-										alt="Workcation"
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
+					{/* Featured Artists */}
+					<FeatruredArtists />
 				</div>
 			</main>
 		</div>

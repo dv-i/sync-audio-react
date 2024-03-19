@@ -78,6 +78,49 @@ export default function Example(): JSX.Element {
 										We supply quality that’s accessible,
 										affordable, without copyright issues.
 									</p>
+									{/* Content section */}
+									<div className="mx-auto mb-12 max-w-7xl sm:mt-0 pt-32  xl:-mt-8">
+										<div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+											<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+												Our mission
+											</h2>
+											<div className="mt-6 flex flex-col gap-x-8 gap-y-20 lg:flex-row">
+												<div className="lg:w-full lg:max-w-2xl lg:flex-auto">
+													<p className="text-xl leading-8 text-gray-600">
+														Sync-Audio was launched
+														by music industry
+														veteran Tesley Francis
+														(alias T J Phillips).
+														His own experience
+														taught him the
+														importance of protecting
+														his content and
+														maintaining an artistic
+														independence.
+													</p>
+													<p className="mt-4 text-xl leading-8 text-gray-600">
+														At Sync-Audio we are
+														passionate about music
+														and its crucial role in
+														our lives. Our goal is
+														to provide a fair
+														revenue platform for
+														independent artists and
+														outstanding content to
+														our clients.
+													</p>
+													<p className="mt-4 text-xl leading-8 text-gray-600">
+														Sync-Audio is also the
+														only platform we know
+														that promotes poetry
+														recordings for licensing
+														across various media
+														industries.
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 								<div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
 									<div className="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
@@ -133,7 +176,7 @@ export default function Example(): JSX.Element {
 				</div>
 
 				{/* Content section */}
-				<div className="mx-auto -mt-12 mb-12 max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8">
+				{/* <div className="mx-auto -mt-12 mb-12 max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8">
 					<div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
 						<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 							Our mission
@@ -160,26 +203,9 @@ export default function Example(): JSX.Element {
 									licensing across various media industries.
 								</p>
 							</div>
-							<div className="lg:flex lg:flex-auto lg:justify-center">
-								<dl className="w-64 space-y-8 xl:w-80">
-									{stats.map((stat) => (
-										<div
-											key={stat.label}
-											className="flex flex-col-reverse gap-y-4"
-										>
-											<dt className="text-base leading-7 text-gray-600">
-												{stat.label}
-											</dt>
-											<dd className="text-5xl font-semibold tracking-tight text-gray-900">
-												{stat.value}
-											</dd>
-										</div>
-									))}
-								</dl>
-							</div>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</main>
 		</div>
 	);

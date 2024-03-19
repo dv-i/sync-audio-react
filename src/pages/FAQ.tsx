@@ -24,9 +24,14 @@ const faqs = [
 		answer: "Get your commercial licence quotes instantly.",
 	},
 	{
-		question: "Who is the End Client?",
-		answer: "The end client is the company the project is for. The end client is whom the project is promoting.",
+		question: "Film/Video Guidelines",
+		answer: "Any adult content/themes, alcohol, tobacco our drug use and political content (see License) Or seek Sync-Audio approval before license purchase.",
 	},
+	{
+		question: "Sync-Audio Licensing Options",
+		answer: "Sync-Audio offers several licensing options: Personal use, Business use, Bundle use and Commercial use.  Special license info@sync-audio.com ask for traditional assistance. Note: Our music is not Stock Music, our music is from real artist from everywhere!",
+	},
+
 	// More questions...
 ];
 

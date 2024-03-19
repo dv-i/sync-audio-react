@@ -15,6 +15,7 @@ import PurchasePolicy from "./pages/PurchasePolicy";
 import SiteUseDisclaimer from "./pages/SiteUseDisclaimer";
 import Contact from "./pages/Contact";
 import Pricing from "./pages/Pricing";
+import BundleUse from "./pages/BundleUse";
 
 function App(): JSX.Element {
 	return (
@@ -27,6 +28,8 @@ function App(): JSX.Element {
 						<Route path="/about" element={<About />} />
 						<Route path="/pricing" element={<Pricing />} />
 						<Route path="/contact" element={<Contact />} />
+
+						<Route path="/bundleuse" element={<BundleUse />} />
 						<Route path="/faq" element={<FAQ />} />
 						<Route
 							path="/privacypolicy"

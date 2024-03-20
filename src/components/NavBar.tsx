@@ -214,7 +214,7 @@ export default function Example(): JSX.Element {
 
 export function NavBar2(): JSX.Element {
 	return (
-		<header className="fixed top-0 left-0 w-full overflow-hidden z-10">
+		<header className="fixed top-0 left-0 w-full z-10">
 			<Popover className="relative bg-white">
 				<div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:justify-start md:space-x-10 lg:px-8">
 					<div className="flex  justify-start overflow-auto">

@@ -12,6 +12,7 @@ function classNames(...classes: string[]): string {
 
 const pricingTypes = [
 	{ value: "personal", label: "Personal" },
+	{ value: "business", label: "Business" },
 	{ value: "commercial", label: "Commercial" },
 ];
 
@@ -49,7 +50,7 @@ export default function Example(): JSX.Element {
 				<RadioGroup
 					value={pricingType}
 					onChange={setPricingType}
-					className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-blue-500"
+					className="grid grid-cols-3 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-blue-500"
 				>
 					<RadioGroup.Label className="sr-only">
 						Payment Pricing Type
@@ -75,6 +76,7 @@ export default function Example(): JSX.Element {
 
 			{pricingType.value === "personal" && <PersonalPricing />}
 			{pricingType.value === "commercial" && <CommercialPricing />}
+			{pricingType.value === "business" && <BusinessPricing />}
 		</div>
 	);
 }
@@ -98,25 +100,10 @@ function PersonalPricing(): JSX.Element {
 			],
 			featured: true,
 		},
-		{
-			name: "Wedding",
-			id: "tier-team",
-			href: "#",
-			priceMonthly: "£35",
-			description:
-				"The perfect plan for the once in a lifetime event of your life",
-			features: [
-				"For wedding videos, slideshows, internal use, and online streaming",
-				"Includes 15 resalable copies and 400 giveaways",
-			],
-			info: ["For single (1) use only", "Perpetual license"],
-			disclaimer: [],
-			featured: false,
-		},
 	];
 
 	return (
-		<div className="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
+		<div className="mx-auto mt-16 flex justify-center max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-3">
 			{tiers.map((tier, tierIdx) => (
 				<div
 					key={tier.id}
@@ -197,8 +184,24 @@ function PersonalPricing(): JSX.Element {
 	);
 }
 
-function CommercialPricing(): JSX.Element {
+function BusinessPricing(): JSX.Element {
 	const tiers = [
+		{
+			name: "Wedding",
+			id: "tier-team",
+			href: "#",
+			priceMonthly: "£35",
+			description:
+				"The perfect plan for the once in a lifetime event of your life",
+			features: [
+				"For wedding videos, slideshows, internal use, and online streaming",
+				"Includes 15 resalable copies and 400 giveaways",
+			],
+			info: ["For single (1) use only", "Perpetual license"],
+			disclaimer: [],
+			mostPopular: false,
+			featured: true,
+		},
 		{
 			name: "Podcast",
 			id: "tier-hobby",
@@ -219,7 +222,180 @@ function CommercialPricing(): JSX.Element {
 				"Does not include paid subscription or downloads",
 			],
 			mostPopular: false,
+			featured: true,
 		},
+		{
+			name: "Promotional Content",
+			id: "tier-enterprise",
+			href: "#",
+			price: "£259.99",
+			optionBasedPrice: {
+				"1-50": "£259.99",
+				"51-250": "£359.99",
+				"250+": "£500",
+			},
+			description:
+				"Dedicated for multi national companies or big corporations",
+
+			features: [
+				"Project promoting product, brand, service, event, promotion, organization, or company",
+				"Web stream or internally",
+				"Facebook, YouTube, Vimeo, TikTok, Instagram, etc.",
+			],
+			info: ["For single (1) use only", "Perpetual license"],
+			disclaimer: ["No broadcasting rights"],
+			mostPopular: false,
+			featured: true,
+		},
+	];
+	const [companySize, setCompanySize] = useState("1-50");
+
+	return (
+		<div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-3">
+			{tiers.map((tier, tierIdx) => (
+				<div
+					key={tier.id}
+					className={
+						"ring-2 ring-gray-200 bg-white/60 rounded-3xl p-8"
+					}
+				>
+					<h3
+						id={tier.id}
+						className="text-base font-semibold leading-7 text-blue-600"
+					>
+						{tier.name}
+					</h3>
+					<p className="mt-6 flex items-baseline gap-x-1">
+						<span className="text-4xl font-bold tracking-tight text-gray-900">
+							{tier.name === "Promotional Content"
+								? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+								  // @ts-expect-error
+								  tier.optionBasedPrice[companySize]
+								: tier.priceMonthly ?? tier.price}
+						</span>
+						<span className="text-sm font-semibold leading-6 text-gray-600">
+							/ track
+						</span>
+					</p>
+					<p className="mt-6 text-base leading-7 text-gray-600">
+						{tier.description}
+					</p>
+
+					<div
+						className={`mt-4 flex justify-left ${
+							tier.name === "Promotional Content"
+								? "visible"
+								: "invisible"
+						}`}
+					>
+						{tier.name === "Promotional Content" && (
+							<div>
+								<span className="isolate block text-gray-500 text-sm font-semibold mb-1">
+									Usage Type
+								</span>
+								<span className="isolate inline-flex rounded-md shadow-sm">
+									<button
+										type="button"
+										className={`relative inline-flex items-center rounded-l-md px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
+											companySize === "1-50"
+												? "text-white bg-blue-500 "
+												: "bg-white text-gray-900"
+										}`}
+										onClick={() => {
+											setCompanySize("1-50");
+										}}
+									>
+										1-50
+									</button>
+
+									<button
+										type="button"
+										className={`relative inline-flex items-center rounded-l-md px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
+											companySize === "51-250"
+												? "text-white bg-blue-500 "
+												: "bg-white text-gray-900"
+										}`}
+										onClick={() => {
+											setCompanySize("51-250");
+										}}
+									>
+										51-250
+									</button>
+									<button
+										type="button"
+										className={`relative inline-flex items-center rounded-l-md px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
+											companySize === "250+"
+												? "text-white bg-blue-500 "
+												: "bg-white text-gray-900"
+										}`}
+										onClick={() => {
+											setCompanySize("250+");
+										}}
+									>
+										250+
+									</button>
+								</span>
+							</div>
+						)}
+						{!["Promotional Content"].includes(tier.name) && (
+							<div className="block" style={{ height: 28 }}>
+								{" "}
+							</div>
+						)}
+					</div>
+
+					<ul
+						role="list"
+						className="mt-8 space-y-3 text-sm leading-6 text-gray-600 sm:mt-10"
+					>
+						{tier.features.map((feature) => (
+							<li key={feature} className="flex gap-x-3">
+								<CheckCircleIcon
+									className="h-6 w-5 flex-none text-green-400"
+									aria-hidden="true"
+								/>
+								{feature}
+							</li>
+						))}
+					</ul>
+
+					<ul
+						role="list"
+						className="mt-8 space-y-3 text-sm leading-6 text-gray-600 sm:mt-8"
+					>
+						{tier.info.map((feature) => (
+							<li key={feature} className="flex gap-x-3">
+								<InformationCircleIcon
+									className="h-6 w-5 flex-none text-blue-600"
+									aria-hidden="true"
+								/>
+								{feature}
+							</li>
+						))}
+					</ul>
+
+					<ul
+						role="list"
+						className="mt-8 space-y-3 text-sm leading-6 text-gray-600 sm:mt-8"
+					>
+						{tier.disclaimer.map((feature) => (
+							<li key={feature} className="flex gap-x-3">
+								<XCircleIcon
+									className="h-6 w-5 flex-none text-red-400"
+									aria-hidden="true"
+								/>
+								{feature}
+							</li>
+						))}
+					</ul>
+				</div>
+			))}
+		</div>
+	);
+}
+
+function CommercialPricing(): JSX.Element {
+	const tiers = [
 		{
 			name: "Indie Cinema",
 			id: "tier-freelancer",
@@ -263,37 +439,13 @@ function CommercialPricing(): JSX.Element {
 			],
 			mostPopular: true,
 		},
-		{
-			name: "Promotion Content",
-			id: "tier-enterprise",
-			href: "#",
-			price: "£259.99",
-			optionBasedPrice: {
-				"1-50": "£259.99",
-				"51-250": "£359.99",
-				"250+": "£500",
-			},
-			description:
-				"Dedicated for multi nantional companies or big corporations",
-
-			features: [
-				"Project promoting product, brand, service, event, promotion, organization, or company",
-				"Web stream or internally",
-				"Facebook, YouTube, Vimeo, TikTok, Instagram, etc.",
-			],
-			info: ["For single (1) use only", "Perpetual license"],
-			disclaimer: ["No broadcasting rights"],
-			mostPopular: false,
-		},
 	];
-
-	const [companySize, setCompanySize] = useState("1-50");
 
 	const [indieType, setindieType] = useState("Film");
 
 	return (
 		<div className="mx-auto mt-16 max-w-7xl px-6 lg:px-8">
-			<div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-4">
+			<div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-3 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-2">
 				{tiers.map((tier) => (
 					<div
 						key={tier.id}
@@ -309,16 +461,10 @@ function CommercialPricing(): JSX.Element {
 						>
 							{tier.name}
 						</h3>
-						<p className="mt-4 text-sm leading-6 text-gray-600">
-							{tier.description}
-						</p>
+
 						<p className="mt-6 flex items-baseline gap-x-1">
 							<span className="text-4xl font-bold tracking-tight text-gray-900">
-								{tier.name === "Promotion Content"
-									? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-									  // @ts-expect-error
-									  tier.optionBasedPrice[companySize]
-									: tier.name === "Indie Cinema"
+								{tier.name === "Indie Cinema"
 									? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 									  // @ts-expect-error
 									  tier.optionBasedPrice[indieType]
@@ -328,63 +474,17 @@ function CommercialPricing(): JSX.Element {
 								/ track
 							</span>
 						</p>
+						<p className="mt-4 text-sm leading-6 text-gray-600">
+							{tier.description}
+						</p>
 
 						<div
 							className={`mt-4 flex justify-left ${
-								tier.name === "Promotion Content" ||
 								tier.name === "Indie Cinema"
 									? "visible"
 									: "invisible"
 							}`}
 						>
-							{tier.name === "Promotion Content" && (
-								<div>
-									<span className="isolate block text-gray-500 text-sm font-semibold mb-1">
-										Company Size
-									</span>
-									<span className="isolate inline-flex rounded-md shadow-sm">
-										<button
-											type="button"
-											className={`relative inline-flex items-center rounded-l-md px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
-												companySize === "1-50"
-													? "text-white bg-blue-500 "
-													: "bg-white text-gray-900"
-											}`}
-											onClick={() => {
-												setCompanySize("1-50");
-											}}
-										>
-											1 - 50
-										</button>
-										<button
-											type="button"
-											className={`relative inline-flex items-center px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
-												companySize === "51-250"
-													? "text-white bg-blue-500 "
-													: "bg-white text-gray-900"
-											}`}
-											onClick={() => {
-												setCompanySize("51-250");
-											}}
-										>
-											51 - 250
-										</button>
-										<button
-											type="button"
-											className={`relative inline-flex items-center rounded-r-md px-3 py-1 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${
-												companySize === "250+"
-													? "text-white bg-blue-500 "
-													: "bg-white text-gray-900"
-											}`}
-											onClick={() => {
-												setCompanySize("250+");
-											}}
-										>
-											250+
-										</button>
-									</span>
-								</div>
-							)}
 							{tier.name === "Indie Cinema" && (
 								<div>
 									<span className="isolate block text-gray-500 text-sm font-semibold mb-1">
@@ -421,9 +521,7 @@ function CommercialPricing(): JSX.Element {
 									</span>
 								</div>
 							)}
-							{!["Indie Cinema", "Promotion Content"].includes(
-								tier.name
-							) && (
+							{!["Indie Cinema"].includes(tier.name) && (
 								<div className="block" style={{ height: 28 }}>
 									{" "}
 								</div>

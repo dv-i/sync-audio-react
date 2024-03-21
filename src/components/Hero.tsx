@@ -42,13 +42,13 @@ export default function Example(): JSX.Element {
 										<div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
 											<a
 												href="#"
-												className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-blue-700 shadow-sm hover:bg-blue-50 sm:px-8"
+												className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-blue-600 shadow-sm hover:bg-blue-50 sm:px-8"
 											>
 												Browse Music
 											</a>
 											<a
 												href="#"
-												className="flex items-center justify-center rounded-md border border-transparent bg-blue-500 bg-opacity-60 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
+												className="flex items-center justify-center rounded-md border border-transparent bg-blue-600 bg-opacity-60 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
 											>
 												Create account
 											</a>

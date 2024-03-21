@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Example(): JSX.Element {
 	return (
-		<div className="bg-white py-24 sm:py-32">
+		<div className="bg-gray-100 py-24 sm:py-32">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				<h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
 					Trusted by several companies using our music

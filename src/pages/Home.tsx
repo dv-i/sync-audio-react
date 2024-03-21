@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import Feature from "../components/Feature";
 import LogoCloud from "../components/LogoCloud";
 import LicenseYourWay from "../components/LicenseYourWay";
+import FeaturedArtists from "../components/FeaturedArtists";
 
 function Home(): JSX.Element {
 	return (
@@ -10,6 +11,8 @@ function Home(): JSX.Element {
 			<Hero />
 			<Feature />
 			<LicenseYourWay />
+			<FeaturedArtists />
+
 			<LogoCloud />
 		</>
 	);

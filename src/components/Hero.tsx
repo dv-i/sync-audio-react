@@ -1,5 +1,4 @@
 import React from "react";
-import FeatruredArtists from "./FeatruredArtists";
 export default function Example(): JSX.Element {
 	return (
 		<div className="bg-white">
@@ -21,11 +20,9 @@ export default function Example(): JSX.Element {
 									/> */}
 									<img
 										className="h-full w-full object-cover"
-										src={
-											"https://plus.unsplash.com/premium_photo-1661720477446-429093480ad7?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-										}
+										src={"assets/images/hero.jpg"}
 									/>
-									<div className="absolute inset-0 bg-blue-700 mix-blend-multiply" />
+									<div className="absolute inset-0 bg-blue-500 mix-blend-multiply" />
 								</div>
 								<div className="relative px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
 									<h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
@@ -47,13 +44,13 @@ export default function Example(): JSX.Element {
 												href="#"
 												className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-blue-700 shadow-sm hover:bg-blue-50 sm:px-8"
 											>
-												Get started
+												Browse Music
 											</a>
 											<a
 												href="#"
 												className="flex items-center justify-center rounded-md border border-transparent bg-blue-500 bg-opacity-60 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
 											>
-												Live demo
+												Create account
 											</a>
 										</div>
 									</div>
@@ -61,9 +58,6 @@ export default function Example(): JSX.Element {
 							</div>
 						</div>
 					</div>
-
-					{/* Featured Artists */}
-					<FeatruredArtists />
 				</div>
 			</main>
 		</div>

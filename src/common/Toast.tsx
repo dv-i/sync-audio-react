@@ -1,10 +1,6 @@
 import { Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import {
-	CheckCircleIcon,
-	ExclamationTriangleIcon,
-	InformationCircleIcon,
-} from "@heroicons/react/24/outline";
+import { CheckCircleIcon, ExclamationTriangleIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
 import React, { Fragment, useEffect } from "react";
 
 export interface ToastProps {
@@ -18,10 +14,7 @@ interface ToastNotificationComponentProps {
 	toast: ToastProps | undefined;
 	setToast: React.Dispatch<React.SetStateAction<ToastProps | undefined>>;
 }
-export default function ToastNotification({
-	toast,
-	setToast,
-}: ToastNotificationComponentProps): JSX.Element {
+export default function ToastNotification({ toast, setToast }: ToastNotificationComponentProps): JSX.Element {
 	useEffect(() => {
 		toast?.visible &&
 			setTimeout(() => {
@@ -32,10 +25,7 @@ export default function ToastNotification({
 	return (
 		<>
 			{/* Global notification live region, render this permanently at the end of the document */}
-			<div
-				aria-live="assertive"
-				className="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 z-50"
-			>
+			<div aria-live="assertive" className="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 z-50">
 				<div className="flex w-full flex-col items-center space-y-4 sm:items-end">
 					{/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
 					<Transition
@@ -53,34 +43,18 @@ export default function ToastNotification({
 								<div className="flex items-start">
 									<div className="flex-shrink-0">
 										{toast?.type === "success" ? (
-											<CheckCircleIcon
-												className="h-6 w-6 text-green-400"
-												aria-hidden="true"
-											/>
+											<CheckCircleIcon className="h-6 w-6 text-green-400" aria-hidden="true" />
 										) : toast?.type === "warning" ? (
-											<ExclamationTriangleIcon
-												className="h-6 w-6 text-yellow-400"
-												aria-hidden="true"
-											/>
+											<ExclamationTriangleIcon className="h-6 w-6 text-yellow-400" aria-hidden="true" />
 										) : toast?.type === "error" ? (
-											<ExclamationTriangleIcon
-												className="h-6 w-6 text-red-400"
-												aria-hidden="true"
-											/>
+											<ExclamationTriangleIcon className="h-6 w-6 text-red-400" aria-hidden="true" />
 										) : (
-											<InformationCircleIcon
-												className="h-6 w-6 text-blue-400"
-												aria-hidden="true"
-											/>
+											<InformationCircleIcon className="h-6 w-6 text-blue-400" aria-hidden="true" />
 										)}
 									</div>
 									<div className="ml-3 w-0 flex-1 pt-0.5">
-										<p className="text-md font-medium text-gray-900">
-											{toast?.title}
-										</p>
-										<p className="mt-1 text-md text-gray-500">
-											{toast?.content}
-										</p>
+										<p className="text-md font-medium text-gray-900">{toast?.title}</p>
+										<p className="mt-1 text-md text-gray-500">{toast?.content}</p>
 									</div>
 									<div className="ml-4 flex flex-shrink-0">
 										<button
@@ -90,13 +64,8 @@ export default function ToastNotification({
 												setToast(undefined);
 											}}
 										>
-											<span className="sr-only">
-												Close
-											</span>
-											<XMarkIcon
-												className="h-5 w-5"
-												aria-hidden="true"
-											/>
+											<span className="sr-only">Close</span>
+											<XMarkIcon className="h-5 w-5" aria-hidden="true" />
 										</button>
 									</div>
 								</div>

@@ -10,10 +10,7 @@ export default function Example(): JSX.Element {
 						alt=""
 					/>
 					<div className="absolute inset-0 bg-gray-900/90 mix-blend-multiply" />
-					<div
-						className="absolute -left-80 -top-56 transform-gpu blur-3xl"
-						aria-hidden="true"
-					>
+					<div className="absolute -left-80 -top-56 transform-gpu blur-3xl" aria-hidden="true">
 						<div
 							className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-r from-[#0956B6] to-[#60A5FA] opacity-[0.45]"
 							style={{
@@ -22,10 +19,7 @@ export default function Example(): JSX.Element {
 							}}
 						/>
 					</div>
-					<div
-						className="hidden md:absolute md:bottom-16 md:left-[50rem] md:block md:transform-gpu md:blur-3xl"
-						aria-hidden="true"
-					>
+					<div className="hidden md:absolute md:bottom-16 md:left-[50rem] md:block md:transform-gpu md:blur-3xl" aria-hidden="true">
 						<div
 							className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-r from-[#0956B6] to-[#60A5FA] opacity-25"
 							style={{
@@ -45,11 +39,7 @@ export default function Example(): JSX.Element {
 								</p> */}
 							</blockquote>
 							<figcaption className="mt-6 text-base text-white">
-								<div className="font-semibold">
-									License a bundle of 5 tracks at 10% discount
-									for online distribution: Pay for what you
-									need when you need it.
-								</div>
+								<div className="font-semibold">License a bundle of 5 tracks at 10% discount for online distribution: Pay for what you need when you need it.</div>
 								{/* <div className="mt-1">CEO of Workcation</div> */}
 							</figcaption>
 						</figure>

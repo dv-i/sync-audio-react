@@ -1,11 +1,13 @@
 const faqs = [
 	{
 		question: "Why should I create a user account?",
-		answer: "Sync-Audio user account gives you access to preferences to express, create and download your choice of music for your project, including your licence on receipt. In return it allows us to retain user history. Your account remembers your contact details, play history and purchases to continually optimize your preferences to meet your needs.",
+		answer:
+			"Sync-Audio user account gives you access to preferences to express, create and download your choice of music for your project, including your licence on receipt. In return it allows us to retain user history. Your account remembers your contact details, play history and purchases to continually optimize your preferences to meet your needs.",
 	},
 	{
 		question: "What is a music license?",
-		answer: "A music licence allows you to use the artist music for your film, video or new media, even if the film or video/new media is for personal use, business use and non-profit use. A licence gives you the legal permission to use the artist music for your project.",
+		answer:
+			"A music licence allows you to use the artist music for your film, video or new media, even if the film or video/new media is for personal use, business use and non-profit use. A licence gives you the legal permission to use the artist music for your project.",
 	},
 	{
 		question: "What is the license type?",
@@ -17,7 +19,8 @@ const faqs = [
 	},
 	{
 		question: "What does a Single Use license mean?",
-		answer: "A single use license means the song/track can only be used once. 1 song/track synced to one edit of one video. It does not include cutdowns, edits, lifts, versions unless specified (separate licences would be required).",
+		answer:
+			"A single use license means the song/track can only be used once. 1 song/track synced to one edit of one video. It does not include cutdowns, edits, lifts, versions unless specified (separate licences would be required).",
 	},
 	{
 		question: "What about Commericial license requests? ",
@@ -29,7 +32,8 @@ const faqs = [
 	},
 	{
 		question: "Sync-Audio Licensing Options",
-		answer: "Sync-Audio offers several licensing options: Personal use, Business use, Bundle use and Commercial use.  Special license info@sync-audio.com ask for traditional assistance. Note: Our music is not Stock Music, our music is from real artist from everywhere!",
+		answer:
+			"Sync-Audio offers several licensing options: Personal use, Business use, Bundle use and Commercial use.  Special license info@sync-audio.com ask for traditional assistance. Note: Our music is not Stock Music, our music is from real artist from everywhere!",
 	},
 
 	// More questions...
@@ -41,16 +45,10 @@ export default function Example(): JSX.Element {
 			<div className="mx-auto max-w-7xl px-6 py-24 sm:pt-32 lg:px-8 lg:py-40">
 				<div className="lg:grid lg:grid-cols-12 lg:gap-8">
 					<div className="lg:col-span-5">
-						<h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
-							Frequently asked questions
-						</h2>
+						<h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">Frequently asked questions</h2>
 						<p className="mt-4 text-base leading-7 text-gray-600">
-							Can’t find the answer you’re looking for? Reach out
-							to our{" "}
-							<a
-								href="mailto:info@sync-audio.com"
-								className="font-semibold text-blue-600 hover:text-blue-500"
-							>
+							Can’t find the answer you’re looking for? Reach out to our{" "}
+							<a href="mailto:info@sync-audio.com" className="font-semibold text-blue-600 hover:text-blue-500">
 								customer support
 							</a>{" "}
 							team.
@@ -60,12 +58,8 @@ export default function Example(): JSX.Element {
 						<dl className="space-y-10">
 							{faqs.map((faq) => (
 								<div key={faq.question}>
-									<dt className="text-base font-semibold leading-7 text-gray-900">
-										{faq.question}
-									</dt>
-									<dd className="mt-2 text-base leading-7 text-gray-600">
-										{faq.answer}
-									</dd>
+									<dt className="text-base font-semibold leading-7 text-gray-900">{faq.question}</dt>
+									<dd className="mt-2 text-base leading-7 text-gray-600">{faq.answer}</dd>
 								</div>
 							))}
 						</dl>

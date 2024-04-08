@@ -35,8 +35,8 @@ function App(): JSX.Element {
 						<Route path="/purchasepolicy" element={<PurchasePolicy />} />
 						<Route path="/disclaimer" element={<SiteUseDisclaimer />} />
 
-						{/* <Route path="/music" element={<ComingSoon />} /> */}
-						<Route path="/music" element={<Music />} />
+						<Route path="/music" element={<ComingSoon />} />
+						{/* <Route path="/music" element={<Music />} /> */}
 						<Route path="/playlists" element={<ComingSoon />} />
 						<Route path="/submissions" element={<ComingSoon />} />
 					</Routes>

@@ -46,8 +46,8 @@ function App(): JSX.Element {
 					<Route path="/submissions" element={<ComingSoon />} />
 
 					{/* E-Commerce */}
-					{/* <Route path="/music" element={<ComingSoon />} /> */}
-					<Route path="/music" element={<Music />} />
+					<Route path="/music" element={<ComingSoon />} />
+					{/* <Route path="/music" element={<Music />} /> */}
 					<Route path="/signin" element={<SignIn />} />
 				</Routes>
 			</div>

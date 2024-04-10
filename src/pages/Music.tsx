@@ -36,7 +36,7 @@ const incentives = [
 function PromoSection(): JSX.Element {
 	return (
 		<div className="bg-gray-50">
-			<div className="mx-auto max-w-7xl py-24 sm:px-2 sm:py-32 lg:px-4">
+			<div className="mx-auto max-w-7xl py-12 sm:px-2 sm:py-20 lg:px-4">
 				<div className="mx-auto max-w-2xl px-4 lg:max-w-none">
 					<div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
 						<div>
@@ -90,8 +90,8 @@ function CategoryFilter(): JSX.Element {
 
 	const [filters, setFilters] = useState([
 		{
-			id: "Genere",
-			name: "Genere",
+			id: "Genre",
+			name: "Genre",
 
 			options: [
 				{ value: "African", label: "African", checked: false },
@@ -326,7 +326,7 @@ function CategoryFilter(): JSX.Element {
 				</Dialog>
 			</Transition.Root>
 
-			<div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+			<div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
 				<h1 className="text-3xl font-bold tracking-tight text-gray-900">Workspace sale</h1>
 				<p className="mt-4 max-w-xl text-sm text-gray-700">
 					Our thoughtfully designed workspace objects are crafted in limited runs. Improve your productivity and organization with these sale items before we run out.

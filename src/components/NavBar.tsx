@@ -1,8 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
+import useCookie from "react-use-cookie";
+import { type UserCookieProps } from "../api";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const navigation = [
 	{ name: "Music", route: "/music", current: false },
@@ -11,8 +14,20 @@ const navigation = [
 ];
 
 export function NavBar2(): JSX.Element {
+	const [userCookie] = useCookie("userToken");
+	const [userAlreadyAuthenticated, setUserAlreadyAuthenticated] = useState<boolean>();
+
+	useEffect(() => {
+		const user = JSON.parse(userCookie) as UserCookieProps;
+		user.emailAddress && user.password && setUserAlreadyAuthenticated(true);
+	}, [userCookie]);
+
+	function handleLogOut(): void {
+		setUserAlreadyAuthenticated(false);
+	}
+
 	return (
-		<header className="fixed top-0 left-0 w-full z-10">
+		<header style={{ marginBottom: 90 }} className="fixed top-0 left-0 w-full z-10">
 			<Popover className="relative bg-white">
 				<div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:justify-start md:space-x-10 lg:px-8">
 					<div className="flex  justify-start overflow-auto">
@@ -36,15 +51,23 @@ export function NavBar2(): JSX.Element {
 						))}
 					</Popover.Group>
 					<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-						<a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-							Sign in
-						</a>
-						<a
-							href="#"
-							className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
-						>
-							Sign up
-						</a>
+						<ShoppingCartIcon className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+						<span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+						{userAlreadyAuthenticated ? (
+							<button
+								onClick={handleLogOut}
+								className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+							>
+								Log Out
+							</button>
+						) : (
+							<NavLink
+								to={"/signin"}
+								className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+							>
+								Sign in
+							</NavLink>
+						)}
 					</div>
 				</div>
 
@@ -83,12 +106,12 @@ export function NavBar2(): JSX.Element {
 									))}
 								</div>
 								<div className="mt-6">
-									<a
-										href="#"
+									<NavLink
+										to={"/signin"}
 										className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
 									>
 										Sign up
-									</a>
+									</NavLink>
 									<p className="mt-6 text-center text-base font-medium text-gray-500">
 										Existing customer?
 										<a href="#" className="text-gray-900">

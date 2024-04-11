@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Dialog, Disclosure, Menu, Popover, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Dialog, Disclosure, Menu, Popover, Transition, RadioGroup } from "@headlessui/react";
+import { XMarkIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 
 import { ChevronDownIcon, InformationCircleIcon, PlayCircleIcon } from "@heroicons/react/20/solid";
 import { PlusCircleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
@@ -9,7 +9,6 @@ import { fetchMusicTracks, type TrackProps } from "../api";
 function Music(): JSX.Element {
 	const [tracks, setTracks] = useState<TrackProps[]>([]);
 	const [filteredTracks, setFilteredTracks] = useState<TrackProps[]>([]);
-
 	const [filters, setFilters] = useState([
 		{
 			id: "Genre",
@@ -135,6 +134,8 @@ function Music(): JSX.Element {
 		},
 	]);
 
+	const [trackToAddToCart, setTrackToAddToCart] = useState<TrackProps>();
+
 	useEffect(() => {
 		if (filters) {
 			const checkedGenreFilters = filters[0].options.filter((option) => option.checked).map((option) => option.value);
@@ -200,89 +201,31 @@ function Music(): JSX.Element {
 		getTracks();
 	}, []);
 
+	function openOverlay(track: TrackProps): void {
+		setTrackToAddToCart(track);
+	}
+
+	function closeOverlay(): void {
+		setTrackToAddToCart(undefined);
+	}
+
 	return (
 		<>
 			<PromoSection />
 			<CategoryFilter filters={filters} setFilters={setFilters} />
-			<div className="">
-				{filteredTracks.map((track) => (
-					<div key={`${track.title}-card`}>
-						<Track track={track} />
-					</div>
-				))}
-			</div>
-			<div className="mt-20"></div>
+			<TrackLibrary filteredTracks={filteredTracks} openOverlay={openOverlay} />
+			{trackToAddToCart && <AddToCartOverlay track={trackToAddToCart} closeOverlay={closeOverlay} />}
 		</>
 	);
 }
 
 export default Music;
 
-const incentives = [
-	{
-		name: "Instant Access",
-		description: "Get access to your audio blazing fast as soon as you check out.",
-		imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg",
-	},
-	{
-		name: "24/7 Customer Support",
-		description: "Our team is always here to support.",
-		imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg",
-	},
-	{
-		name: "Fast Shopping Cart",
-		description: "Look how fast that cart is going. Pick the audio, the license and you're 99% done with everything",
-		imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-fast-checkout-light.svg",
-	},
-];
-
-function PromoSection(): JSX.Element {
-	return (
-		<div className="bg-blue-50">
-			<div className="mx-auto max-w-7xl py-12 sm:px-2 sm:py-20 lg:px-4">
-				<div className="mx-auto max-w-2xl px-4 lg:max-w-none ">
-					<div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
-						<div>
-							<h2 className="text-4xl font-bold tracking-tight text-gray-900">Unlock the Soundtrack to Your Creativity</h2>
-							<p className="mt-4 text-gray-500">
-								Discover endless possibilities with our premium audio licenses. Elevate your projects with ease, whether you're a creator, filmmaker, or business owner. Explore, license, and unlock
-								the power of sound today.
-							</p>
-						</div>
-						<div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-gray-100">
-							<img
-								src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?q=80&w=2013&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-								alt=""
-								className="object-cover object-center"
-							/>
-						</div>
-					</div>
-					<div className=" mt-16 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
-						{incentives.map((incentive) => (
-							<div key={incentive.name} className="sm:flex lg:block">
-								<div className="sm:flex-shrink-0">
-									<img className="h-16 w-16" src={incentive.imageSrc} alt="" />
-								</div>
-								<div className="mt-4 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-6">
-									<h3 className="text-sm font-medium text-gray-900">{incentive.name}</h3>
-									<p className="mt-2 text-sm text-gray-500">{incentive.description}</p>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-}
-
 const sortOptions = [
 	{ name: "Most Popular", href: "#", current: true },
 	{ name: "Best Rating", href: "#", current: false },
 	{ name: "Newest", href: "#", current: false },
 ];
-
-// const activeFilters = [{ value: "objects", label: "Objects" }];
 
 function classNames(...classes: string[]): string {
 	return classes.filter(Boolean).join(" ");
@@ -592,10 +535,19 @@ function CategoryFilter({ filters, setFilters }: CategoryFilterProps): JSX.Eleme
 	);
 }
 
-interface TrackComponentProps {
-	track: TrackProps;
+function TrackLibrary({ filteredTracks, openOverlay }: { filteredTracks: TrackProps[]; openOverlay: (track: TrackProps) => void }): JSX.Element {
+	return (
+		<div className="">
+			{filteredTracks.map((track) => (
+				<div key={`${track.title}-card`}>
+					<Track track={track} openOverlay={openOverlay} />
+				</div>
+			))}
+		</div>
+	);
 }
-function Track({ track }: TrackComponentProps): JSX.Element {
+
+function Track({ track, openOverlay }: { track: TrackProps; openOverlay: (track: TrackProps) => void }): JSX.Element {
 	return (
 		<>
 			<div className="mx-auto my-4 max-w-7xl px-4">
@@ -624,17 +576,238 @@ function Track({ track }: TrackComponentProps): JSX.Element {
 
 					{/* Waveform + Duration + Actions */}
 					<div className="flex flex-row gap-6 items-center w-1/2 justify-between">
-						{/* Waveform + Time */}
+						{/* Waveform */}
 						<div className="bg-blue-100 h-10 w-96 rounded-md"></div>
+						{/* Time */}
 						<div className="text-sm text-gray-500">{`${Math.floor(track.duration / 60)}:${(track.duration % 60).toPrecision(2)}`}</div>
+						{/* Actions */}
 						<div className="flex flex-row gap-2 items-center">
 							<InformationCircleIcon className=" cursor-pointer text-blue-600 hover:text-blue-700 h-6 w-6" />
 							<PlusCircleIcon className="cursor-pointer text-blue-600 hover:text-blue-700 h-6 w-6" />
-							<ShoppingCartIcon className="cursor-pointer text-blue-600 hover:text-blue-700 h-6 w-6" />
+							<ShoppingCartIcon
+								onClick={() => {
+									openOverlay(track);
+								}}
+								className="cursor-pointer text-blue-600 hover:text-blue-700 h-6 w-6"
+							/>
 						</div>
 					</div>
 				</div>
 			</div>
 		</>
+	);
+}
+
+export function AddToCartOverlay({ track, closeOverlay }: { track: TrackProps; closeOverlay: () => void }): JSX.Element {
+	const [open] = useState(true);
+	const [selected, setSelected] = useState(plans[1]);
+
+	function handleAddToCart(): void {
+		//
+	}
+
+	return (
+		<Transition.Root show={open} as={Fragment}>
+			<Dialog as="div" className="relative z-10" onClose={closeOverlay}>
+				<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
+					<div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+				</Transition.Child>
+
+				<div className="fixed inset-0 z-10  w-screen overflow-y-auto">
+					<div className="flex min-h-full  items-end justify-center p-4 text-center sm:items-center sm:p-0">
+						<Transition.Child
+							as={Fragment}
+							enter="ease-out duration-300"
+							enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+							enterTo="opacity-100 translate-y-0 sm:scale-100"
+							leave="ease-in duration-200"
+							leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+							leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+						>
+							<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+								<div>
+									<div className="mt-3 sm:mt-5">
+										{/* Title */}
+										<Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
+											Pick the correct license
+										</Dialog.Title>
+
+										{/* Content */}
+										<div className="mt-2">
+											<Licenses selected={selected} setSelected={setSelected} />
+										</div>
+
+										{/* Add to Cart Button */}
+										<div className="flex flex-row justify-between mt-6">
+											<div></div>
+											<button
+												type="button"
+												className="inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+												onClick={handleAddToCart}
+											>
+												Add to Cart
+												<CheckCircleIcon className="-mr-0.5 h-5 w-5" aria-hidden="true" />
+											</button>
+										</div>
+									</div>
+								</div>
+							</Dialog.Panel>
+						</Transition.Child>
+					</div>
+				</div>
+			</Dialog>
+		</Transition.Root>
+	);
+}
+
+export function PromoSection(): JSX.Element {
+	return (
+		<div className="bg-white">
+			<div className="overflow-hidden pt-32 sm:pt-14">
+				<div className="bg-blue-700">
+					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+						<div className="relative pb-16 pt-48 sm:pb-24">
+							<div>
+								<h2 id="sale-heading" className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+									Unlock the soundtrack
+									<br />
+									for your creativity
+								</h2>
+								<div className="mt-6 text-base">
+									<div className=" text-white  w-96">
+										Discover endless possibilities with our premium audio licenses. Elevate your projects with ease, whether you're a creator, filmmaker, or business owner. Explore, license, and
+										unlock the power of sound today
+										<span aria-hidden="true"> &rarr;</span>
+									</div>
+								</div>
+							</div>
+
+							<div className="absolute -top-32 left-1/2 -translate-x-1/2 transform sm:top-6 sm:translate-x-0">
+								<div className="ml-24 flex min-w-max space-x-6 sm:ml-3 lg:space-x-8">
+									<div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
+										<div className="flex-shrink-0">
+											<img
+												className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+												src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?q=80&w=3872&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+												alt=""
+											/>
+										</div>
+
+										<div className="mt-6 flex-shrink-0 sm:mt-0">
+											<img
+												className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+												src="https://images.unsplash.com/photo-1459233313842-cd392ee2c388?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+												alt=""
+											/>
+										</div>
+									</div>
+									<div className="flex space-x-6 sm:-mt-20 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
+										<div className="flex-shrink-0">
+											<img
+												className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+												src="https://images.unsplash.com/photo-1519677584237-752f8853252e?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+												alt=""
+											/>
+										</div>
+
+										<div className="mt-6 flex-shrink-0 sm:mt-0">
+											<img
+												className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+												src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+												alt=""
+											/>
+										</div>
+									</div>
+									<div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
+										<div className="flex-shrink-0">
+											<img
+												className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+												src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+												alt=""
+											/>
+										</div>
+
+										<div className="mt-6 flex-shrink-0 sm:mt-0">
+											<img
+												className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+												src="https://images.unsplash.com/photo-1548502632-6b93092aad0b?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+												alt=""
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+const plans = [
+	{ name: "Podcast", description: "The essentials to provide your best work for clients", price: 209 },
+	{ name: "Home / Students", description: "Perfect for personal use", price: 18 },
+	{ name: "Promotinal Tier", description: "Dedicated for multi national companies or big corporations", price: 359.99 },
+	{ name: "Vlogger", description: "A plan that scales with your rapidly growing business.", price: 29.99 },
+];
+
+interface LicenseProps {
+	selected: {
+		name: string;
+		description: string;
+		price: number;
+	};
+	setSelected: React.Dispatch<
+		React.SetStateAction<{
+			name: string;
+			description: string;
+			price: number;
+		}>
+	>;
+}
+export function Licenses({ selected, setSelected }: LicenseProps): JSX.Element {
+	return (
+		<div className="mt-4">
+			<RadioGroup value={selected} onChange={setSelected}>
+				<RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
+				<div className="space-y-4">
+					{plans.map((plan) => (
+						<RadioGroup.Option
+							key={plan.name}
+							value={plan}
+							className={({ active }) =>
+								classNames(
+									active ? "border-indigo-600 ring-2 ring-indigo-600" : "border-gray-300",
+									"relative block cursor-pointer rounded-lg border bg-white px-6 py-2 shadow-sm focus:outline-none sm:flex sm:justify-between"
+								)
+							}
+						>
+							{({ active, checked }) => (
+								<>
+									<span className="flex items-center">
+										<span className="flex flex-col text-sm">
+											<RadioGroup.Label as="span" className="font-medium text-gray-900">
+												{plan.name}
+											</RadioGroup.Label>
+											<RadioGroup.Description as="span" className="text-gray-500">
+												<span className="block sm:inline">{plan.description}</span>{" "}
+											</RadioGroup.Description>
+										</span>
+									</span>
+									<RadioGroup.Description as="span" className="mt-2 flex text-sm sm:ml-4 sm:mt-0 sm:flex-col sm:text-right justify-center">
+										<span className="font-medium text-gray-900">£{plan.price}</span>
+									</RadioGroup.Description>
+									<span
+										className={classNames(active ? "border" : "border-2", checked ? "border-indigo-600" : "border-transparent", "pointer-events-none absolute -inset-px rounded-lg")}
+										aria-hidden="true"
+									/>
+								</>
+							)}
+						</RadioGroup.Option>
+					))}
+				</div>
+			</RadioGroup>
+		</div>
 	);
 }

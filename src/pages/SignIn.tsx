@@ -8,7 +8,7 @@ export default function Example(): JSX.Element {
 	const [password, setPassword] = useState<string>();
 	const [errorMessage, setErrorMessage] = useState<string>();
 
-	const [userCookie, setUserCookie] = useCookie("userToken");
+	const [userCookie, setUserCookie] = useCookie("userToken", JSON.stringify({}));
 
 	const navigate = useNavigate();
 	const location = useLocation();

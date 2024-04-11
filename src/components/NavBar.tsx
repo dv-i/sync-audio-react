@@ -14,7 +14,7 @@ const navigation = [
 ];
 
 export function NavBar2(): JSX.Element {
-	const [userCookie] = useCookie("userToken");
+	const [userCookie] = useCookie("userToken", JSON.stringify({}));
 	const [userAlreadyAuthenticated, setUserAlreadyAuthenticated] = useState<boolean>();
 
 	useEffect(() => {

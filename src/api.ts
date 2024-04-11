@@ -10,7 +10,7 @@ export interface UserCookieProps {
 
 export async function authenticateUser(username: string, password: string): Promise<UserCookieProps | undefined> {
 	// TODO: @Jaimish we need to call the backend API
-	// return undefined;
+	// return UserCookieProps object | undefined in case of failure;
 	return {
 		emailAddress: "user@gmail.com",
 		password: "Pass@12345",
@@ -33,5 +33,7 @@ export interface TrackProps {
 }
 
 export async function fetchMusicTracks(): Promise<TrackProps[]> {
+	// TODO: @Jaimish we need to call the backend API
+	// return TrackProps[];
 	return tracks.tracks;
 }

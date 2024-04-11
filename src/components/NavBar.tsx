@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import useCookie from "react-use-cookie";
 import { type UserCookieProps } from "../api";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { useCart } from "react-use-cart";
 
 const navigation = [
 	{ name: "Music", route: "/music", current: false },
@@ -25,6 +26,10 @@ export function NavBar2(): JSX.Element {
 	function handleLogOut(): void {
 		setUserAlreadyAuthenticated(false);
 	}
+
+	const CART = useCart();
+
+	console.log(CART.items);
 
 	return (
 		<header style={{ marginBottom: 90 }} className="fixed top-0 left-0 w-full z-10">
@@ -52,7 +57,7 @@ export function NavBar2(): JSX.Element {
 					</Popover.Group>
 					<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
 						<ShoppingCartIcon className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-						<span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+						<span className="ml-2 text-md font-medium text-gray-500 group-hover:text-gray-600">{CART.items.length}</span>
 						{userAlreadyAuthenticated ? (
 							<button
 								onClick={handleLogOut}

@@ -5,6 +5,7 @@ import { XMarkIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon, InformationCircleIcon, PlayCircleIcon } from "@heroicons/react/20/solid";
 import { PlusCircleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { fetchMusicTracks, type TrackProps } from "../api";
+import { useCart, type Item } from "react-use-cart";
 
 function Music(): JSX.Element {
 	const [tracks, setTracks] = useState<TrackProps[]>([]);
@@ -598,12 +599,36 @@ function Track({ track, openOverlay }: { track: TrackProps; openOverlay: (track:
 	);
 }
 
+export interface TrackCartItem extends Item {
+	track: TrackProps;
+	license: string;
+}
+
 export function AddToCartOverlay({ track, closeOverlay }: { track: TrackProps; closeOverlay: () => void }): JSX.Element {
+	const CART = useCart();
 	const [open] = useState(true);
 	const [selected, setSelected] = useState(plans[1]);
 
 	function handleAddToCart(): void {
-		//
+		const cartItem: TrackCartItem = {
+			id: track.id.toString(),
+			price: selected.price,
+			license: selected.name,
+			track,
+		};
+
+		if (CART.items.filter((item) => item.id === cartItem.id)) {
+			// If item already in cart, we can update the license
+			CART.updateItem(cartItem.id, {
+				...cartItem,
+				quantity: 1,
+			});
+		} else {
+			// Adding a new item to cart
+			CART.addItem(cartItem);
+		}
+
+		closeOverlay();
 	}
 
 	return (

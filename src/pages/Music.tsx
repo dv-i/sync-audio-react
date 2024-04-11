@@ -1,92 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Popover, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
+import { ChevronDownIcon, InformationCircleIcon, PlayCircleIcon } from "@heroicons/react/20/solid";
+import { PlusCircleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { fetchMusicTracks, type TrackProps } from "../api";
 
 function Music(): JSX.Element {
-	return (
-		<>
-			<PromoSection />
-			<CategoryFilter />
-			<div className="mt-20"></div>
-		</>
-	);
-}
-
-export default Music;
-
-const incentives = [
-	{
-		name: "Instant Access",
-		description: "Get access to your audio blazing fast as soon as you check out.",
-		imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg",
-	},
-	{
-		name: "24/7 Customer Support",
-		description: "Our team is always here to support.",
-		imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg",
-	},
-	{
-		name: "Fast Shopping Cart",
-		description: "Look how fast that cart is going. Pick the audio, the license and you're 99% done with everything",
-		imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-fast-checkout-light.svg",
-	},
-];
-
-function PromoSection(): JSX.Element {
-	return (
-		<div className="bg-gray-50">
-			<div className="mx-auto max-w-7xl py-12 sm:px-2 sm:py-20 lg:px-4">
-				<div className="mx-auto max-w-2xl px-4 lg:max-w-none">
-					<div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
-						<div>
-							<h2 className="text-4xl font-bold tracking-tight text-gray-900">Unlock the Soundtrack to Your Creativity</h2>
-							<p className="mt-4 text-gray-500">
-								Discover endless possibilities with our premium audio licenses. Elevate your projects with ease, whether you're a creator, filmmaker, or business owner. Explore, license, and unlock
-								the power of sound today.
-							</p>
-						</div>
-						<div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-gray-100">
-							<img
-								src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?q=80&w=2013&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-								alt=""
-								className="object-cover object-center"
-							/>
-						</div>
-					</div>
-					<div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
-						{incentives.map((incentive) => (
-							<div key={incentive.name} className="sm:flex lg:block">
-								<div className="sm:flex-shrink-0">
-									<img className="h-16 w-16" src={incentive.imageSrc} alt="" />
-								</div>
-								<div className="mt-4 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-6">
-									<h3 className="text-sm font-medium text-gray-900">{incentive.name}</h3>
-									<p className="mt-2 text-sm text-gray-500">{incentive.description}</p>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-}
-
-const sortOptions = [
-	{ name: "Most Popular", href: "#", current: true },
-	{ name: "Best Rating", href: "#", current: false },
-	{ name: "Newest", href: "#", current: false },
-];
-
-// const activeFilters = [{ value: "objects", label: "Objects" }];
-
-function classNames(...classes: string[]): string {
-	return classes.filter(Boolean).join(" ");
-}
-
-function CategoryFilter(): JSX.Element {
-	const [open, setOpen] = useState(false);
+	const [tracks, setTracks] = useState<TrackProps[]>([]);
+	const [filteredTracks, setFilteredTracks] = useState<TrackProps[]>([]);
 
 	const [filters, setFilters] = useState([
 		{
@@ -213,6 +135,187 @@ function CategoryFilter(): JSX.Element {
 		},
 	]);
 
+	useEffect(() => {
+		if (filters) {
+			const checkedGenreFilters = filters[0].options.filter((option) => option.checked).map((option) => option.value);
+			const checkedMoodFilters = filters[1].options.filter((option) => option.checked).map((option) => option.value);
+			const checkedStyleFilters = filters[2].options.filter((option) => option.checked).map((option) => option.value);
+			const checkedTempoFilters = filters[3].options.filter((option) => option.checked).map((option) => option.value);
+
+			// tracks.filter((track) => {
+			// 	// track.genres.some
+			// });
+
+			const genereFiltered = tracks.filter((singleTrack) => {
+				if (checkedGenreFilters.length > 0) {
+					const intersection = singleTrack.genres.filter((value) => checkedGenreFilters.includes(value));
+					return intersection.length > 0;
+				} else {
+					return true;
+				}
+			});
+
+			const moodFiltered = genereFiltered.filter((singleTrack) => {
+				if (checkedMoodFilters.length > 0) {
+					const intersection = singleTrack.moods.filter((value) => checkedMoodFilters.includes(value));
+					return intersection.length > 0;
+				} else {
+					return true;
+				}
+			});
+
+			const styleFiltered = moodFiltered.filter((singleTrack) => {
+				if (checkedStyleFilters.length > 0) {
+					return checkedStyleFilters.includes(singleTrack.style);
+				} else {
+					return true;
+				}
+			});
+
+			const tempoRanges = checkedTempoFilters.map((filter) => {
+				const [min, max] = filter.split("–").map((value) => parseInt(value.trim()));
+				return { min, max };
+			});
+
+			const tempoFiltered = styleFiltered.filter((singleTrack) => {
+				if (checkedTempoFilters.length > 0) {
+					return tempoRanges.some((range) => singleTrack.tempo >= range.min && singleTrack.tempo <= range.max);
+				} else {
+					return true;
+				}
+			});
+
+			setFilteredTracks(tempoFiltered);
+		}
+	}, [filters]);
+
+	useEffect(() => {
+		async function getTracks(): Promise<void> {
+			const response = await fetchMusicTracks();
+			response.length > 0 && setTracks(response);
+			response.length > 0 && setFilteredTracks(response);
+		}
+
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		getTracks();
+	}, []);
+
+	return (
+		<>
+			<PromoSection />
+			<CategoryFilter filters={filters} setFilters={setFilters} />
+			<div className="">
+				{filteredTracks.map((track) => (
+					<div key={`${track.title}-card`}>
+						<Track track={track} />
+					</div>
+				))}
+			</div>
+			<div className="mt-20"></div>
+		</>
+	);
+}
+
+export default Music;
+
+const incentives = [
+	{
+		name: "Instant Access",
+		description: "Get access to your audio blazing fast as soon as you check out.",
+		imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg",
+	},
+	{
+		name: "24/7 Customer Support",
+		description: "Our team is always here to support.",
+		imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg",
+	},
+	{
+		name: "Fast Shopping Cart",
+		description: "Look how fast that cart is going. Pick the audio, the license and you're 99% done with everything",
+		imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-fast-checkout-light.svg",
+	},
+];
+
+function PromoSection(): JSX.Element {
+	return (
+		<div className="bg-blue-50">
+			<div className="mx-auto max-w-7xl py-12 sm:px-2 sm:py-20 lg:px-4">
+				<div className="mx-auto max-w-2xl px-4 lg:max-w-none ">
+					<div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
+						<div>
+							<h2 className="text-4xl font-bold tracking-tight text-gray-900">Unlock the Soundtrack to Your Creativity</h2>
+							<p className="mt-4 text-gray-500">
+								Discover endless possibilities with our premium audio licenses. Elevate your projects with ease, whether you're a creator, filmmaker, or business owner. Explore, license, and unlock
+								the power of sound today.
+							</p>
+						</div>
+						<div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-gray-100">
+							<img
+								src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?q=80&w=2013&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+								alt=""
+								className="object-cover object-center"
+							/>
+						</div>
+					</div>
+					<div className=" mt-16 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
+						{incentives.map((incentive) => (
+							<div key={incentive.name} className="sm:flex lg:block">
+								<div className="sm:flex-shrink-0">
+									<img className="h-16 w-16" src={incentive.imageSrc} alt="" />
+								</div>
+								<div className="mt-4 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-6">
+									<h3 className="text-sm font-medium text-gray-900">{incentive.name}</h3>
+									<p className="mt-2 text-sm text-gray-500">{incentive.description}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+const sortOptions = [
+	{ name: "Most Popular", href: "#", current: true },
+	{ name: "Best Rating", href: "#", current: false },
+	{ name: "Newest", href: "#", current: false },
+];
+
+// const activeFilters = [{ value: "objects", label: "Objects" }];
+
+function classNames(...classes: string[]): string {
+	return classes.filter(Boolean).join(" ");
+}
+
+interface CategoryFilterProps {
+	filters: {
+		id: string;
+		name: string;
+		options: {
+			value: string;
+			label: string;
+			checked: boolean;
+		}[];
+	}[];
+	setFilters: React.Dispatch<
+		React.SetStateAction<
+			{
+				id: string;
+				name: string;
+				options: {
+					value: string;
+					label: string;
+					checked: boolean;
+				}[];
+			}[]
+		>
+	>;
+}
+
+function CategoryFilter({ filters, setFilters }: CategoryFilterProps): JSX.Element {
+	const [open, setOpen] = useState(false);
+
 	const activeFilters: { value: string; label: string }[] = filters.flatMap((filter) => filter.options.filter((option) => option.checked));
 
 	const handleRemoveFilter = (valueToRemove: string): void => {
@@ -327,10 +430,8 @@ function CategoryFilter(): JSX.Element {
 			</Transition.Root>
 
 			<div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-				<h1 className="text-3xl font-bold tracking-tight text-gray-900">Workspace sale</h1>
-				<p className="mt-4 max-w-xl text-sm text-gray-700">
-					Our thoughtfully designed workspace objects are crafted in limited runs. Improve your productivity and organization with these sale items before we run out.
-				</p>
+				<h1 className="text-3xl font-bold tracking-tight text-gray-900">Find the perfect song</h1>
+				<p className="mt-4 max-w-xl text-sm text-gray-700">Our thoughtfully curated library of music..</p>
 			</div>
 
 			{/* Filters */}
@@ -454,7 +555,7 @@ function CategoryFilter(): JSX.Element {
 				</div>
 
 				{/* Active filters */}
-				<div className="bg-gray-100">
+				<div className="bg-blue-50">
 					<div className="mx-auto max-w-7xl px-4 py-3 sm:flex sm:items-center sm:px-6 lg:px-8">
 						<h3 className="text-sm font-medium text-gray-500">
 							Filters
@@ -488,5 +589,52 @@ function CategoryFilter(): JSX.Element {
 				</div>
 			</section>
 		</div>
+	);
+}
+
+interface TrackComponentProps {
+	track: TrackProps;
+}
+function Track({ track }: TrackComponentProps): JSX.Element {
+	return (
+		<>
+			<div className="mx-auto my-4 max-w-7xl px-4">
+				<div className=" hover:bg-blue-50 rounded-lg h-16 flex flex-row gap-10 items-center justify-between px-4">
+					{/* Play + Name + Genere */}
+					<div className="flex flex-row gap-6 items-center justify-between w-1/2 ">
+						{/* Play + Name */}
+						<div className="flex flex-row gap-6 items-center ">
+							<div className="h-10 w-10 bg-blue-100 rounded-xl flex items-center justify-center">
+								<PlayCircleIcon className="h-6 w-6 text-blue-600" />
+							</div>
+
+							<div className="flex flex-col">
+								<div className="text-md text-gray-600 font-semibold">{track.title} </div>
+								<div className="text-sm text-gray-400">{track.artist}</div>
+							</div>
+						</div>
+						<div className="flex flex-row gap-2 flex-wrap">
+							{track.genres.map((genre) => (
+								<span key={`${track.title}-genere-${genre}`} className="inline-flex items-center rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
+									{genre}
+								</span>
+							))}
+						</div>
+					</div>
+
+					{/* Waveform + Duration + Actions */}
+					<div className="flex flex-row gap-6 items-center w-1/2 justify-between">
+						{/* Waveform + Time */}
+						<div className="bg-blue-100 h-10 w-96 rounded-md"></div>
+						<div className="text-sm text-gray-500">{`${Math.floor(track.duration / 60)}:${(track.duration % 60).toPrecision(2)}`}</div>
+						<div className="flex flex-row gap-2 items-center">
+							<InformationCircleIcon className=" cursor-pointer text-blue-600 hover:text-blue-700 h-6 w-6" />
+							<PlusCircleIcon className="cursor-pointer text-blue-600 hover:text-blue-700 h-6 w-6" />
+							<ShoppingCartIcon className="cursor-pointer text-blue-600 hover:text-blue-700 h-6 w-6" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
 	);
 }

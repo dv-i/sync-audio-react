@@ -1,4 +1,7 @@
 // TODO: @Jaimish make the shape of this interface
+
+import { tracks } from "./data/tracks";
+
 //       to match the cookie object
 export interface UserCookieProps {
 	emailAddress: string;
@@ -12,4 +15,23 @@ export async function authenticateUser(username: string, password: string): Prom
 		emailAddress: "user@gmail.com",
 		password: "Pass@12345",
 	};
+}
+
+export interface TrackProps {
+	id: number;
+	checksum: string;
+	title: string;
+	artist: string;
+	genre: string;
+	mood: string;
+	duration: number;
+	featured: number;
+	style: string;
+	tempo: number;
+	genres: string[];
+	moods: string[];
+}
+
+export async function fetchMusicTracks(): Promise<TrackProps[]> {
+	return tracks.tracks;
 }

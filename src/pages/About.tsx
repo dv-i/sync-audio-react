@@ -1,12 +1,6 @@
 import React from "react";
 import { type JSX } from "react/jsx-runtime";
 
-const stats = [
-	{ label: "Music Library", value: "100+" },
-	{ label: "Assets under holding", value: "$12,000" },
-	{ label: "New artists annualy", value: "25" },
-];
-
 export default function Example(): JSX.Element {
 	return (
 		<div className="bg-white">

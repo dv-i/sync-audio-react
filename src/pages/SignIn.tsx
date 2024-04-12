@@ -47,8 +47,8 @@ export default function Example(): JSX.Element {
 							<h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
 							<p className="mt-2 text-sm leading-6 text-gray-500">
 								Not a member?{" "}
-								<a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-									Start a 14 day free trial
+								<a href="#" className="font-semibold text-blue-600 hover:text-blue-500">
+									Register now.
 								</a>
 							</p>
 						</div>
@@ -71,7 +71,7 @@ export default function Example(): JSX.Element {
 												}}
 												autoComplete="email"
 												required
-												className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+												className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
 											/>
 										</div>
 									</div>
@@ -91,21 +91,21 @@ export default function Example(): JSX.Element {
 													setPassword(e.target.value);
 												}}
 												required
-												className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+												className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
 											/>
 										</div>
 									</div>
 
 									<div className="flex items-center justify-between">
 										<div className="flex items-center">
-											<input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+											<input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600" />
 											<label htmlFor="remember-me" className="ml-3 block text-sm leading-6 text-gray-700">
 												Remember me
 											</label>
 										</div>
 
 										<div className="text-sm leading-6">
-											<a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+											<a href="#" className="font-semibold text-blue-600 hover:text-blue-500">
 												Forgot password?
 											</a>
 										</div>
@@ -116,7 +116,7 @@ export default function Example(): JSX.Element {
 									<div>
 										<button
 											type="submit"
-											className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+											className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
 											onClick={() => {
 												// eslint-disable-next-line @typescript-eslint/no-floating-promises
 												handSignIn();
@@ -128,7 +128,8 @@ export default function Example(): JSX.Element {
 								</div>
 							</div>
 
-							<div className="mt-10">
+							{/* SSO Stuff */}
+							{/* <div className="mt-10">
 								<div className="relative">
 									<div className="absolute inset-0 flex items-center" aria-hidden="true">
 										<div className="w-full border-t border-gray-200" />
@@ -175,7 +176,7 @@ export default function Example(): JSX.Element {
 										<span className="text-sm font-semibold leading-6">GitHub</span>
 									</a>
 								</div>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>

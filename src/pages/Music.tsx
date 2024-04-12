@@ -617,7 +617,7 @@ export function AddToCartOverlay({ track, closeOverlay }: { track: TrackProps; c
 			track,
 		};
 
-		if (CART.items.filter((item) => item.id === cartItem.id)) {
+		if (CART.items.filter((item) => item.id === cartItem.id).length > 0) {
 			// If item already in cart, we can update the license
 			CART.updateItem(cartItem.id, {
 				...cartItem,
